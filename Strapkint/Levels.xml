@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  
+  <Level width="170" spawnPosition="0,0">
+    
+    <BackgroundEntity position="20,45">
+      <row>T - zmiana motywu (ciemny / jasny)</row>
+    </BackgroundEntity>
+      
+    <BackgroundEntity position="20,15">
+      <row>← / A - ruch w lewo</row>
+      <row>→ / D - ruch w prawo</row>
+    </BackgroundEntity>
+
+    <BackgroundEntity position="95,16">
+      <row>Spacja / W / ↑ - skok</row>
+    </BackgroundEntity>
+
+    <Block position="101,0" size="4,3" spikes="left,right" />
+  
+  </Level>
+  
+  <Level width="170" spawnPosition="5,0">
+
+    <Spike position="45,0" length="125" direction="up" />
+
+    <Block position="40,0" size="4,3" spikes="left,right" />
+    <Block position="14,9" size="7,1" />
+    <Block position="30,16" size="3,1" spikes="left" />
+    <Block position="50,20" size="7,1" />
+    <Block position="80,20" size="20,1" />
+    <Coin position="90,40" />
+    <BackgroundEntity position="80, 45">
+      <row>Monety to znajdźki;</row>
+      <row>możesz je zbierać dla satysfakcji</row>
+    </BackgroundEntity>
+    <Block position="110,25" size="5,3" />
+    <Block position="123,30" size="3,10" spikes="left" />
+    <Block position="119,18" size="10,1" spikes="up" />
+    <Block position="121,19" size="5,2" />
+    <Block position="130,23" size="3,2" spikes="up" />
+    <Block position="133,23" size="3,2" />
+    <Block position="143,28" size="4,3" spikes="left" />
+    <Block position="153,33" size="10,2" />
+    <Coin position="162,47" />
+    <Block position="167,0" size="3,29" spikes="left" />
+
+  </Level>
+
+  <Level width="200" spawnPosition="4,0">
+
+    <Block position="0,0" size="4,29" />
+    
+    <Block position="10,7" size="5,1" />
+    <Block position="15,14" size="5,1" />
+    <Block position="10,21" size="5,1" />
+    
+    <BackgroundEntity position="80, 25">
+      <row>Narazie to tyle!</row>
+      <row>Więcej leveli możesz stworzyć samemu w pliku Levels.xml</row>
+      <row>Projekt możesz odnaleźć na https://github.com/Volper212/Strapkint</row>
+    </BackgroundEntity>
+    
+  </Level>
+
+</root>
