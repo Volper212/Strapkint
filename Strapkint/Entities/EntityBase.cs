@@ -4,9 +4,8 @@ namespace Strapkint.Entities
 {
     abstract class EntityBase
     {
-        public EntityBase(char[,] text, Position position, int zIndex = 0, ConsoleColor darkColor = Viewport.Light, ConsoleColor lightColor = Viewport.Dark)
+        public EntityBase(char[,] text, Position position, ConsoleColor darkColor = Viewport.Light, ConsoleColor lightColor = Viewport.Dark)
         {
-            ZIndex = zIndex;
             Text = text;
             Position = position;
             Width = Text.GetLength(0);
@@ -18,9 +17,8 @@ namespace Strapkint.Entities
             LightColorMap.Fill(lightColor);
         }
 
-        public static Viewport Viewport { get; set; }
+        public static Viewport Viewport { protected get; set; }
 
-        public int ZIndex { get; }
         public int Width { get; }
         public int Height { get; }
         public Size Size { get; }
@@ -36,6 +34,5 @@ namespace Strapkint.Entities
         }
 
         public abstract Position ViewportPosition { get; }
-        //public abstract Position GetViewportPosition(Viewport viewport);
     }
 }

@@ -85,17 +85,4 @@ namespace Strapkint.IO
         public readonly char UnicodeChar;
         public readonly int ControlKeyState;
     }
-
-    //[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
-    //struct ConsoleFontInfoEx
-    //{
-    //    public uint ByteSize;
-    //    public uint Font;
-    //    public Coord FontSize;
-    //    public int FontFamily;
-    //    public int FontWeight;
-
-    //    [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]
-    //    public string FaceName;
-    //}
 }

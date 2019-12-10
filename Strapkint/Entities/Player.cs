@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Strapkint.Entities
 {
@@ -17,54 +15,57 @@ namespace Strapkint.Entities
         const double gravity = jumpSpeed * horizontalSpeed / desiredJumpHeightX;
 
         const string text =
-            "\0O\0" +
-            "/|\\" +
-            "/\0\\";
+            "\0O\0" + //  O
+            "/|\\" +  // /|\
+            "/\0\\";  // / \
+
         const int width = 3;
 
+        readonly Scoreboard scoreboard;
+        
         double verticalSpeed = 0;
         bool hasAlreadyJumped = false;
+        bool isOnGround = true;
+        int currentFallCooldown = 0;
 
-        public Player(Level level)
+        public Player(Level level, Scoreboard scoreboard)
             : base(text.To2DCharArray(width), Position.Zero, level, true)
         {
+            this.scoreboard = scoreboard;
             PositionF = Level.SpawnPosition;
         }
 
         public override Position Position => (Position)PositionF;
-        public bool CanJump => IsOnGround || (CurrentFallCooldown > 0 && !hasAlreadyJumped);
-        public bool IsOnGround { get; private set; } = true;
-
-        public PositionF PositionF { get; private set; }
-        public int CurrentFallCooldown { get; private set; } = 0;
+        public bool CanJump => isOnGround || (currentFallCooldown > 0 && !hasAlreadyJumped);
+        public PositionF PositionF { get; set; }
 
         public void Jump()
         {
             hasAlreadyJumped = true;
-            IsOnGround = false;
+            isOnGround = false;
             verticalSpeed = jumpSpeed;
         }
 
         public void Update()
         {
-            if (!IsOnGround)
+            if (!isOnGround)
             {
                 Move(Axis.Vertical, verticalSpeed - (gravity / 2));
                 verticalSpeed -= gravity;
-                --CurrentFallCooldown;
+                --currentFallCooldown;
             }
 
             if (Collides(Axis.Vertical, offsetY: -0.01))
             {
                 hasAlreadyJumped = false;
-                IsOnGround = true;
+                isOnGround = true;
                 PositionF.Y = Math.Floor(PositionF.Y);
                 verticalSpeed = 0;
             }
-            else if (IsOnGround)
+            else if (isOnGround)
             {
-                CurrentFallCooldown = fallCooldown;
-                IsOnGround = false;
+                currentFallCooldown = fallCooldown;
+                isOnGround = false;
             }
         }
 
@@ -81,7 +82,7 @@ namespace Strapkint.Entities
         {
             Viewport.Position.X = 0;
             PositionF = Level.SpawnPosition;
-            IsOnGround = true;
+            isOnGround = true;
         }
 
         void Move(Axis axis, double distance)
@@ -136,7 +137,7 @@ namespace Strapkint.Entities
             {
                 if (position < entity.Position + entity.Size && position + Size > entity.Position)
                 {
-                    if (entity is Spike && !(IsOnGround && axis == Axis.Vertical))
+                    if (entity is Spike && !(isOnGround && axis == Axis.Vertical))
                     {
                         shouldDie = true;
                     }
@@ -146,7 +147,7 @@ namespace Strapkint.Entities
                     }
                     else if (entity is Coin coin)
                     {
-                        ++Program.Scoreboard.Coins;
+                        ++scoreboard.Coins;
                         toRemove.Add(coin);
                     }
                 }

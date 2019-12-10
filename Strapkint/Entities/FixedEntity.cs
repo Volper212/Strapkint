@@ -5,7 +5,7 @@
         readonly Corner corner;
 
         public FixedEntity(char[,] text, Position position, Corner corner = Corner.TopLeft)
-            : base(text, position, 2)
+            : base(text, position)
         {
             this.corner = corner;
         }

@@ -7,7 +7,7 @@ namespace Strapkint.Entities
         private Level _level;
 
         public Entity(char[,] text, Position position, Level level, bool isCollidable = true, ConsoleColor darkColor = Viewport.Light, ConsoleColor lightColor = Viewport.Dark)
-            : base(text, position, 1, darkColor, lightColor)
+            : base(text, position, darkColor, lightColor)
         {
             _level = level;
             Level.Entities.Add(this);

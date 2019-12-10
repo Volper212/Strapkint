@@ -18,7 +18,8 @@ namespace Strapkint.Entities
         public Scoreboard() : base(text.To2DCharArray(width), Position.Zero, Corner.TopRight)
         {
             const int countersX = 6;
-            const int levelY = 1, coinsY = 2;
+            const int levelY = 1;
+            const int coinsY = 2;
             const int coinX = countersX - 3;
             const int zeros = 3;
 

@@ -7,7 +7,7 @@ namespace Strapkint.Entities
         readonly Level level;
 
         public BackgroundEntity(char[,] text, Position position, Level level)
-            : base(text, position, 0, ConsoleColor.Gray, ConsoleColor.DarkGray)
+            : base(text, position, ConsoleColor.Gray, ConsoleColor.DarkGray)
         {
             this.level = level;
             level.BackgroundEntities.Add(this);

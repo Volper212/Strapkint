@@ -13,16 +13,13 @@ namespace Strapkint
     {
         const int tickLength = 15;
 
-        public static Scoreboard Scoreboard { get; } = new Scoreboard();
-
-        public static event Action EveryTick = delegate { };
-
+        static readonly Scoreboard scoreboard = new Scoreboard();
         static readonly Viewport viewport = new Viewport(170, 50);
-        static readonly HashSet<FixedEntity> fixedEntities = new HashSet<FixedEntity> { Scoreboard };
+        static readonly HashSet<FixedEntity> fixedEntities = new HashSet<FixedEntity> { scoreboard };
         static int currentLevelIndex = 0;
         static readonly List<Level> levels = GetXmlLevels();
         static Level currentLevel = levels[0];
-        static readonly Player player = new Player(currentLevel);
+        static readonly Player player = new Player(currentLevel, scoreboard);
         static readonly ConcurrentDictionary<GameControl, int> controlsPressed = new ConcurrentDictionary<GameControl, int>();
 
         static Program()
@@ -61,15 +58,6 @@ namespace Strapkint
                                 xmlEntity.Attributes["spikes"]?.Value.ParseDirections() ?? Directions.None,
                                 level);
                             break;
-                        //case "MovingBlock":
-                        //    new MovingBlock(
-                        //        xmlEntity.GetPosition(),
-                        //        xmlEntity.Attributes["direction"].Value.ToEnum<Direction>(),
-                        //        xmlEntity.GetIntegerAttribute("distance"),
-                        //        xmlEntity.GetSize(),
-                        //        xmlEntity.Attributes["spikes"]?.Value.ParseDirections() ?? Directions.None,
-                        //        level);
-                            //break;
                         case "Coin":
                             new Coin(xmlEntity.GetPosition(), level);
                             break;
@@ -165,13 +153,11 @@ namespace Strapkint
                 {
                     case ConsoleKey.Subtract:
                         PreviousLevel();
-                        player.PositionF.X = currentLevel.SpawnPosition.X;
-                        player.PositionF.Y = currentLevel.SpawnPosition.Y;
+                        player.PositionF = currentLevel.SpawnPosition;
                         break;
                     case ConsoleKey.Add:
                         NextLevel();
-                        player.PositionF.X = currentLevel.SpawnPosition.X;
-                        player.PositionF.Y = currentLevel.SpawnPosition.Y;
+                        player.PositionF = currentLevel.SpawnPosition;
                         break;
                     case ConsoleKey.T:
                         viewport.IsDarkTheme ^= true;
@@ -200,7 +186,6 @@ namespace Strapkint
         static void Update()
         {
             HandleControls();
-            EveryTick();
             player.Update();
         }
 
@@ -223,7 +208,7 @@ namespace Strapkint
                 player.Level = currentLevel = levels[--currentLevelIndex];
                 viewport.Position.X = currentLevel.Width - viewport.Width;
                 player.PositionF.X = currentLevel.Width - player.Width;
-                --Scoreboard.LevelCount;
+                --scoreboard.LevelCount;
             }
         }
 
@@ -234,7 +219,7 @@ namespace Strapkint
                 player.Level = currentLevel = levels[++currentLevelIndex];
                 viewport.Position.X = 0;
                 player.PositionF.X = 0;
-                ++Scoreboard.LevelCount;
+                ++scoreboard.LevelCount;
             }
         }
     }

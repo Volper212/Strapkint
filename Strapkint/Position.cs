@@ -2,13 +2,6 @@
 
 namespace Strapkint
 {
-
-    //interface IPosition
-    //{
-    //    int X { get; }
-    //    int Y { get; }
-    //}
-
     class Position
     {
         public Position(int x, int y)
@@ -139,23 +132,4 @@ namespace Strapkint
             return new Position((int)Math.Round(input.X), (int)Math.Round(input.Y));
         }
     }
-
-    //struct FixedPosition : IPosition
-    //{
-    //    public FixedPosition(int x, int y)
-    //    {
-    //        X = x;
-    //        Y = y;
-    //    }
-
-    //    public static FixedPosition Zero => new FixedPosition(0, 0);
-
-    //    public int X { get; }
-    //    public int Y { get; }
-
-    //    public static implicit operator Position(FixedPosition input)
-    //    {
-    //        return new Position(input.X, input.Y);
-    //    }
-    //}
 }

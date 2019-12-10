@@ -41,17 +41,5 @@ namespace Strapkint.IO
 
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern bool GetConsoleMode(this IntPtr inputHandle, out InputConsoleModes mode);
-
-        //[DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        //public static extern bool GetCurrentConsoleFontEx(
-        //    this IntPtr consoleOutput,
-        //    bool maximumWindow,
-        //    ref ConsoleFontInfoEx fontInfo);
-
-        //[DllImport("kernel32.dll", SetLastError = true)]
-        //public static extern bool SetCurrentConsoleFontEx(
-        //    this IntPtr outputHandle,
-        //    bool maximumWindow,
-        //    ref ConsoleFontInfoEx fontInfo);
     }
 }
